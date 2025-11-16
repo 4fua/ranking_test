@@ -19,11 +19,11 @@ const settingsDatabase = {
       "SDVX 課題曲B"
     ],
     difficulties: [
-      "NOV",
-      "ADV",
-      "EXH",
-      "MXM",
-      "VVD"
+      "NOVICE",
+      "ADVANCED",
+      "EXHAUST",
+      "MAXIMUM",
+      "VIVID"
     ]
   },
   "chunithm": {
@@ -39,7 +39,7 @@ const settingsDatabase = {
       "ULTIMA"
     ]
   },
-  "ongeki": {
+  "オンゲキ": {
     songs: [
       "オンゲキ 課題曲1",
       "オンゲキ 課題曲2"
@@ -68,23 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
     songSelect.innerHTML = ''; 
     difficultySelect.innerHTML = '';
 
-    const placeholderSong = document.createElement('option');
-    placeholderSong.value = "";
-    placeholderSong.textContent = "-- まず機種を選んでください --";
-    songSelect.appendChild(placeholderSong);
-    songSelect.disabled = true;
-
-    const placeholderDiff = document.createElement('option');
-    placeholderDiff.value = "";
-    placeholderDiff.textContent = "-- まず機種を選んでください --";
-    difficultySelect.appendChild(placeholderDiff);
-    difficultySelect.disabled = true;
-
     if (selectedGame && settingsDatabase[selectedGame]) {
       const settings = settingsDatabase[selectedGame];
       
       songSelect.disabled = false;
+      const placeholderSong = document.createElement('option');
+      placeholderSong.value = "";
       placeholderSong.textContent = "-- 曲名を選んでください --";
+      songSelect.appendChild(placeholderSong);
+      
       settings.songs.forEach(songName => {
         const option = document.createElement('option');
         option.value = songName;
@@ -93,13 +85,30 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       
       difficultySelect.disabled = false;
+      const placeholderDiff = document.createElement('option');
+      placeholderDiff.value = "";
       placeholderDiff.textContent = "-- 難易度を選んでください --";
+      difficultySelect.appendChild(placeholderDiff);
+
       settings.difficulties.forEach(diffName => {
         const option = document.createElement('option');
         option.value = diffName;
         option.textContent = diffName;
         difficultySelect.appendChild(option);
       });
+
+    } else {
+      songSelect.disabled = true;
+      const placeholderSong = document.createElement('option');
+      placeholderSong.value = "";
+      placeholderSong.textContent = "-- まず機種を選んでください --";
+      songSelect.appendChild(placeholderSong);
+
+      difficultySelect.disabled = true;
+      const placeholderDiff = document.createElement('option');
+      placeholderDiff.value = "";
+      placeholderDiff.textContent = "-- まず機種を選んでください --";
+      difficultySelect.appendChild(placeholderDiff);
     }
   });
 
@@ -145,4 +154,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-
