@@ -1,50 +1,55 @@
 const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwMdqGxDiclieFVx3OU9beJ2GdxY4xwcSDSBshAnR5K1iz8hGpHR5qJqlbSO8mQ4iHgZg/exec';
 
 const settingsDatabase = {
-  "A": {
+  "IIDX": {
     songs: [
-      "機種A - 課題曲1",
-      "機種A - 課題曲2",
-      "機種A - 課題曲3"
+      "IIDX 課題曲1",
+      "IIDX 課題曲2"
     ],
     difficulties: [
-      "Easy",
-      "Normal",
-      "Hard"
+      "NORMAL",
+      "HYPER",
+      "ANOTHER",
+      "LEGGENDARIA"
     ]
   },
-  "B": {
+  "SDVX": {
     songs: [
-      "機種B - 課題曲ALPHA",
-      "機種B - 課題曲BETA"
+      "SDVX 課題曲A",
+      "SDVX 課題曲B"
     ],
     difficulties: [
-      "LIGHT",
-      "HEAVY",
-      "MAXIMUM"
+      "NOVICE",
+      "ADVANCED",
+      "EXHAUST",
+      "MAXIMUM",
+      "VIVID"
     ]
   },
-  "C": {
+  "chunithm": {
     songs: [
-      "機種C - チャレンジ曲X",
-      "機種C - チャレンジ曲Y"
+      "チュウニズム 課題曲X",
+      "チュウニズム 課題曲Y"
     ],
     difficulties: [
-      "Basic",
-      "Advanced",
-      "Expert"
+      "BASIC",
+      "ADVANCED",
+      "EXPERT",
+      "MASTER",
+      "ULTIMA"
     ]
   },
-  "D": {
+  "ongeki": {
     songs: [
-      "機種D - 課題曲(難)"
+      "オンゲキ 課題曲1",
+      "オンゲキ 課題曲2"
     ],
     difficulties: [
-      "Lv1",
-      "Lv2",
-      "Lv3",
-      "Lv4",
-      "Lv5"
+      "BASIC",
+      "ADVANCED",
+      "EXPERT",
+      "MASTER",
+      "LUNATIC"
     ]
   }
 };
