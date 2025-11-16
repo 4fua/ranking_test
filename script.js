@@ -1,4 +1,4 @@
-const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwxN67dIeCHQid1RPl9sC0XcGKar6Um4mNG4I2eEWUG7auF-VZGSb-aNSyqnn2QdRa4JQ/exec';
+const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbz2ZddMnS1wmLOxDojOBsnH25T9NPTlFl1C5f5tFleHmPexsDgeOkQQoJR5h1Jg8FiPLg/exec';
 
 const IS_RANKING_PUBLIC = true;
 
@@ -291,3 +291,4 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRankings();
 
 });
+
