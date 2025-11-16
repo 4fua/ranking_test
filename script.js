@@ -1,6 +1,6 @@
 const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbz2ZddMnS1wmLOxDojOBsnH25T9NPTlFl1C5f5tFleHmPexsDgeOkQQoJR5h1Jg8FiPLg/exec';
 
-const IS_RANKING_PUBLIC = true;
+const IS_RANKING_PUBLIC = false;
 
 const settingsDatabase = {
   "IIDX": {
@@ -291,4 +291,5 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRankings();
 
 });
+
 
