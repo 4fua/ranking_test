@@ -1,14 +1,13 @@
 // ==========================================================
-// ！！設定必須！！
-// ステップ2でコピーしたGASの「Web アプリの URL」をここに貼り付け
+//WebアプリURLをここに貼り付け
 const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwMdqGxDiclieFVx3OU9beJ2GdxY4xwcSDSBshAnR5K1iz8hGpHR5qJqlbSO8mQ4iHgZg/exec';
 // ==========================================================
 
 
 // ==========================================================
 // ▼▼ ここを変更 ▼▼
-// 曲リストのデータベース（可変にしたい部分）
-// ここのキー "A", "B" などを、htmlの<option value="...">と一致させてください
+// 曲リストのデータベース 可変
+// ここのキーをhtmlの<option value="...">と一致
 const songDatabase = {
   "A": [
     "機種A - 課題曲1",
@@ -131,4 +130,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
 
