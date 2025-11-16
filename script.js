@@ -1,7 +1,7 @@
 // ==========================================================
 // ！！設定必須！！
 // ステップ2でコピーしたGASの「Web アプリの URL」をここに貼り付け
-const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbymGxPmW88WcTK4FI05L4Qed7-RLc5Y9G9Trp4rjF7u3a8DClbC2c5GHOfM65GNSV4J5w/exec';
+const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwMdqGxDiclieFVx3OU9beJ2GdxY4xwcSDSBshAnR5K1iz8hGpHR5qJqlbSO8mQ4iHgZg/exec';
 // ==========================================================
 
 
@@ -131,3 +131,4 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
