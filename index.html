@@ -12,8 +12,13 @@
 
   <section id="infoSection">
     <h2>0月IR</h2>
-    <p>スコアを更新する場合、以前提出したものと同じ名前を入力し、送信してください。</p>
-    <p>間違えてしまったりなどなど(送信の取り消しとか)は、fua X(m4fua), Discord(m4fua)まで。</p>
+    <p>スコアを更新する場合、以前提出したものと同じtwitter IDを入力し、送信してください。</p>
+    <p>間違えてしまったりなど(送信の取り消しとか)は、fua (X:m4fua, Discord:m4fua)まで。</p>
+  </section>
+
+  <section id="passwordSection">
+    <label for="passwordInput">サークルパスワード:</label>
+    <input type="password" id="passwordInput" placeholder="サークル共通のパスワードを入力">
   </section>
 
   <form id="scoreForm">
@@ -44,8 +49,13 @@
     </div>
 
     <div class="form-group">
-      <label for="nameInput">名前:</label>
-      <input type="text" id="nameInput" required>
+      <label for="tidInput">Twitter ID (必須・スコア更新用):</label>
+      <input type="text" id="tidInput" required placeholder="例: @GoogleJapan (ランキングには表示されません)">
+    </div>
+    
+    <div class="form-group">
+      <label for="nameInput">名前 (任意・ランキング表示用):</label>
+      <input type="text" id="nameInput" placeholder="未入力の場合は「名無しさん」になります">
     </div>
 
     <div class="form-group">
@@ -74,4 +84,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
