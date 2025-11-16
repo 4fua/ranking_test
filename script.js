@@ -1,13 +1,7 @@
 // ==========================================================
-//WebアプリURLをここに貼り付け
 const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwMdqGxDiclieFVx3OU9beJ2GdxY4xwcSDSBshAnR5K1iz8hGpHR5qJqlbSO8mQ4iHgZg/exec';
 // ==========================================================
 
-
-// ==========================================================
-// ▼▼ ここを変更 ▼▼
-// 曲リストのデータベース 可変
-// ここのキーをhtmlの<option value="...">と一致
 const songDatabase = {
   "A": [
     "機種A - 課題曲1",
@@ -23,17 +17,9 @@ const songDatabase = {
     "機種C - チャレンジ曲Y"
   ],
   "D": [
-    // 自由記述にしたい場合は、"（自由記述）" のような項目を入れておくと
-    // ユーザーが何を選んだかわかりやすいです。
-    // もし曲選択をさせずに直接入力させたい場合は、別途カスタマイズが必要です。
     "機種D - 課題曲(難)" 
   ]
 };
-// ▲▲ ここまで変更 ▲▲
-// ==========================================================
-
-
-// --- ここから下は変更不要 ---
 
 document.addEventListener('DOMContentLoaded', () => {
   const gameSelect = document.getElementById('gameSelect');
@@ -42,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusMessage = document.getElementById('statusMessage');
   const submitButton = document.getElementById('submitButton');
 
-  // 1. 機種選択が変更された時の処理
+  // (gameSelect.addEventListener の部分は変更なし)
   gameSelect.addEventListener('change', () => {
     const selectedGame = gameSelect.value;
     
@@ -77,7 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 2. フォームが送信された時の処理
+
+  // 2. フォームが送信された時の処理 (★ここを修正★)
   form.addEventListener('submit', (e) => {
     e.preventDefault(); // フォームの既定の送信動作をキャンセル
 
@@ -99,27 +86,23 @@ document.addEventListener('DOMContentLoaded', () => {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {
-        'Content-Type': 'text/plain;charset=utf-8', // GAS doPostはtext/plainを推奨
+        'Content-Type': 'text/plain;charset=utf-8',
       },
+      mode: 'no-cors' // ★★★ これを追加 ★★★
     })
-    .then(response => response.json())
-    .then(data => {
-      // 成功時
-      if (data.result === 'success') {
-        statusMessage.textContent = 'スコアを正常に送信しました！';
-        statusMessage.style.color = 'green';
-        form.reset(); // フォームをリセット
-        // フォームリセット後にプルダウンも初期状態に戻す
-        songSelect.innerHTML = '<option value="">-- まず機種を選んでください --</option>';
-        songSelect.disabled = true;
-      } else {
-        // GAS側でエラーが起きた時
-        throw new Error(data.message || '送信に失敗しました。');
-      }
+    .then(response => {
+      // mode: 'no-cors' の場合、レスポンスの中身は確認できないが、
+      // リクエストが「送信された」こと（ネットワークエラー以外）は保証される。
+      statusMessage.textContent = 'スコアを送信しました！'; // メッセージを成功時のものに変更
+      statusMessage.style.color = 'green';
+      form.reset(); // フォームをリセット
+      // フォームリセット後にプルダウンも初期状態に戻す
+      songSelect.innerHTML = '<option value="">-- まず機種を選んでください --</option>';
+      songSelect.disabled = true;
     })
     .catch(error => {
-      // ネットワークエラーなど
-      statusMessage.textContent = `エラー: ${error.message}`;
+      // mode: 'no-cors' でも、ネットワーク接続自体が切れている場合などはcatchに入る
+      statusMessage.textContent = `ネットワークエラー: ${error.message}`;
       statusMessage.style.color = 'red';
     })
     .finally(() => {
@@ -128,7 +111,4 @@ document.addEventListener('DOMContentLoaded', () => {
       submitButton.textContent = '送信';
     });
   });
-
 });
-
-
