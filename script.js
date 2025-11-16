@@ -1,6 +1,23 @@
 const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbz2ZddMnS1wmLOxDojOBsnH25T9NPTlFl1C5f5tFleHmPexsDgeOkQQoJR5h1Jg8FiPLg/exec';
 
+// ==========================================================
+// ▼▼ 基本設定 ▼▼
+// ==========================================================
+
+// (1) サークル内パスワード (ここの "" の中を設定してください)
+const REQUIRED_PASSWORD = "password123";
+
+// (2) ランキング公開設定
+// true: ランキングを表示する
+// false: ランキングを隠す
 const IS_RANKING_PUBLIC = true;
+
+// (3) スコア送信受付設定
+// true: スコア送信を受け付ける
+// false: スコア送信を停止する
+const IS_SUBMISSION_OPEN = true;
+
+// ==========================================================
 
 const settingsDatabase = {
   "IIDX": {
@@ -64,6 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusMessage = document.getElementById('statusMessage');
   const submitButton = document.getElementById('submitButton');
   const rankingContainer = document.getElementById('rankingContainer');
+  const passwordInput = document.getElementById('passwordInput');
+
+  function setStatus(message, isError = false) {
+    statusMessage.textContent = message;
+    statusMessage.className = isError ? 'error' : 'success';
+  }
 
   gameSelect.addEventListener('change', () => {
     const selectedGame = gameSelect.value;
@@ -117,15 +140,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault(); 
+    
+    if (!IS_SUBMISSION_OPEN) {
+      setStatus("スコア送信期間は終了しました！結果発表をお待ちください。", true);
+      return;
+    }
+
+    if (passwordInput.value !== REQUIRED_PASSWORD) {
+      setStatus("パスワードが間違っています。", true);
+      return;
+    }
+
+    const tidValue = document.getElementById('tidInput').value;
+    if (!tidValue) {
+      setStatus("Twitter IDは必須です。", true);
+      return;
+    }
 
     submitButton.disabled = true;
     submitButton.textContent = '送信中...';
-    statusMessage.textContent = '';
+    setStatus('');
     
     const formData = {
       game: document.getElementById('gameSelect').value,
       song: document.getElementById('songSelect').value,
       difficulty: document.getElementById('difficultySelect').value,
+      tid: tidValue,
       name: document.getElementById('nameInput').value,
       score: document.getElementById('scoreInput').value,
       comment: document.getElementById('commentInput').value
@@ -140,8 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mode: 'no-cors'
     })
     .then(response => {
-      statusMessage.textContent = 'スコアを送信しました！最新のランキングを読み込みます...';
-      statusMessage.style.color = 'green';
+      setStatus('スコアを送信しました！最新のランキングを読み込みます...', false);
       form.reset(); 
       songSelect.innerHTML = '<option value="">-- まず機種を選んでください --</option>';
       songSelect.disabled = true;
@@ -151,8 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
       loadRankings(); 
     })
     .catch(error => {
-      statusMessage.textContent = `ネットワークエラー: ${error.message}`;
-      statusMessage.style.color = 'red';
+      setStatus(`ネットワークエラー: ${error.message}`, true);
     })
     .finally(() => {
       submitButton.disabled = false;
@@ -169,6 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const groupedByGame = data.reduce((acc, record) => {
+      if (!record.game) return acc;
       const game = record.game;
       if (!acc[game]) {
         acc[game] = [];
@@ -186,6 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gameSection.appendChild(gameTitle);
 
       const groupedBySong = groupedByGame[gameName].reduce((acc, record) => {
+        if (!record.song) return acc;
         const song = record.song;
         if (!acc[song]) {
           acc[song] = [];
@@ -203,6 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
         songSection.appendChild(songTitle);
 
         const groupedByDifficulty = groupedBySong[songName].reduce((acc, record) => {
+          if (!record.difficulty) return acc;
           const difficulty = record.difficulty;
           if (!acc[difficulty]) {
             acc[difficulty] = [];
@@ -222,9 +263,10 @@ document.addEventListener('DOMContentLoaded', () => {
           const highestScores = new Map();
           
           for (const record of groupedByDifficulty[difficultyName]) {
-            const name = record.name;
-            if (!highestScores.has(name) || record.score > highestScores.get(name).score) {
-              highestScores.set(name, record);
+            if (!record.tid || record.score === null || record.score === undefined) continue;
+            const tid = record.tid;
+            if (!highestScores.has(tid) || record.score > highestScores.get(tid).score) {
+              highestScores.set(tid, record);
             }
           }
           
@@ -235,7 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const list = document.createElement('ol');
           sortedRecords.forEach(record => {
             const item = document.createElement('li');
-            const scoreText = document.createTextNode(record.name + ': ' + record.score);
+            const displayName = record.name || '名無しさん';
+            const scoreText = document.createTextNode(displayName + ': ' + record.score);
             
             item.appendChild(scoreText);
             
@@ -291,6 +334,3 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRankings();
 
 });
-
-
-
