@@ -1,4 +1,4 @@
-const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxU77C72UagubZXgaEpbLvaLGVtG55jn6_48n6XopRuMFSmOrsO-2jT9n8YxE7iZqtZlQ/exec';
+const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwxN67dIeCHQid1RPl9sC0XcGKar6Um4mNG4I2eEWUG7auF-VZGSb-aNSyqnn2QdRa4JQ/exec';
 
 // ==========================================================
 // ▼▼ ランキング公開設定 ▼▼
@@ -16,10 +16,10 @@ const settingsDatabase = {
       "IIDX 課題曲2"
     ],
     difficulties: [
-      "NORMAL",
-      "HYPER",
-      "ANOTHER",
-      "LEGGENDARIA"
+      "NORMAL 8",
+      "HYPER 10",
+      "ANOTHER 12",
+      "LEGGENDARIA 12"
     ]
   },
   "SDVX": {
@@ -264,3 +264,4 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRankings();
 
 });
+
