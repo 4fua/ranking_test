@@ -208,13 +208,35 @@ document.addEventListener('DOMContentLoaded', () => {
         difficultyTitle.textContent = difficultyName;
         difficultySection.appendChild(difficultyTitle);
 
-        const sortedRecords = groupedByDifficulty[difficultyName].sort((a, b) => b.score - a.score);
+        // --- ▼▼ ここからが修正箇所 ▼▼ ---
+        
+        // 1. プレイヤーごとの最高スコアを記録するMap（辞書）を作成
+        const highestScores = new Map();
+        
+        // 2. この難易度の全レコード（全提出）をチェック
+        for (const record of groupedByDifficulty[difficultyName]) {
+          const name = record.name;
+          // まだ記録がないか、記録されているスコアより今回のスコアが高い場合
+          if (!highestScores.has(name) || record.score > highestScores.get(name).score) {
+            // 最高スコアとしてこのレコードを上書き保存
+            highestScores.set(name, record);
+          }
+        }
+        
+        // 3. Mapから最高スコアのレコードだけを取り出して配列に戻す
+        const filteredRecords = Array.from(highestScores.values());
+        
+        // --- ▲▲ ここまでが修正箇所 ▲▲ ---
+        
+        // 4. 最高スコアの配列を、スコアの降順（高い順）に並び替え
+        const sortedRecords = filteredRecords.sort((a, b) => b.score - a.score);
 
         const list = document.createElement('ol');
         sortedRecords.forEach(record => {
           const item = document.createElement('li');
           const scoreText = document.createTextNode(record.name + ': ' + record.score);
           const songSpan = document.createElement('span');
+          // 最高スコアを記録した時の曲名を表示
           songSpan.textContent = '(曲: ' + record.song + ')';
           
           item.appendChild(scoreText);
@@ -231,13 +253,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function loadRankings() {
     
-    // ▼▼ ここでスイッチの値をチェック ▼▼
     if (!IS_RANKING_PUBLIC) {
-      rankingContainer.innerHTML = '<p>ランキング公開を停止しました！結果発表日をお待ちください！</p>';
-      rankingContainer.style.color = '#333'; // メッセージの色を通常に戻す
-      return; // ランキングを読み込まずに処理を終了
+      rankingContainer.innerHTML = '<p>ランキング公開を停止しました！結果発表日をお待ちください。</p>';
+      rankingContainer.style.color = '#333'; 
+      return; 
     }
-    // ▲▲ ここまで ▲▲
 
     rankingContainer.innerHTML = '<p>ランキングを読み込み中...</p>';
     rankingContainer.style.color = '#333';
@@ -264,5 +284,3 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRankings();
 
 });
-
-
