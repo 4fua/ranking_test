@@ -1,13 +1,6 @@
 const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwxN67dIeCHQid1RPl9sC0XcGKar6Um4mNG4I2eEWUG7auF-VZGSb-aNSyqnn2QdRa4JQ/exec';
 
-// ==========================================================
-// ▼▼ ランキング公開設定 ▼▼
-// true: ランキングをページ下部に表示する
-// false: ランキングを隠し、指定したメッセージを表示する
-// ==========================================================
 const IS_RANKING_PUBLIC = true;
-// ==========================================================
-
 
 const settingsDatabase = {
   "IIDX": {
@@ -135,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
       difficulty: document.getElementById('difficultySelect').value,
       name: document.getElementById('nameInput').value,
       score: document.getElementById('scoreInput').value,
+      comment: document.getElementById('commentInput').value
     };
 
     fetch(GAS_WEB_APP_URL, {
@@ -191,61 +185,74 @@ document.addEventListener('DOMContentLoaded', () => {
       gameTitle.textContent = gameName;
       gameSection.appendChild(gameTitle);
 
-      const groupedByDifficulty = groupedByGame[gameName].reduce((acc, record) => {
-        const difficulty = record.difficulty;
-        if (!acc[difficulty]) {
-          acc[difficulty] = [];
+      const groupedBySong = groupedByGame[gameName].reduce((acc, record) => {
+        const song = record.song;
+        if (!acc[song]) {
+          acc[song] = [];
         }
-        acc[difficulty].push(record);
+        acc[song].push(record);
         return acc;
       }, {});
 
-      for (const difficultyName of Object.keys(groupedByDifficulty).sort()) {
-        const difficultySection = document.createElement('div');
-        difficultySection.className = 'difficulty-ranking';
+      for (const songName of Object.keys(groupedBySong).sort()) {
+        const songSection = document.createElement('div');
+        songSection.className = 'song-ranking';
         
-        const difficultyTitle = document.createElement('h4');
-        difficultyTitle.textContent = difficultyName;
-        difficultySection.appendChild(difficultyTitle);
+        const songTitle = document.createElement('h4');
+        songTitle.textContent = songName;
+        songSection.appendChild(songTitle);
 
-        // --- ▼▼ ここからが修正箇所 ▼▼ ---
-        
-        // 1. プレイヤーごとの最高スコアを記録するMap（辞書）を作成
-        const highestScores = new Map();
-        
-        // 2. この難易度の全レコード（全提出）をチェック
-        for (const record of groupedByDifficulty[difficultyName]) {
-          const name = record.name;
-          // まだ記録がないか、記録されているスコアより今回のスコアが高い場合
-          if (!highestScores.has(name) || record.score > highestScores.get(name).score) {
-            // 最高スコアとしてこのレコードを上書き保存
-            highestScores.set(name, record);
+        const groupedByDifficulty = groupedBySong[songName].reduce((acc, record) => {
+          const difficulty = record.difficulty;
+          if (!acc[difficulty]) {
+            acc[difficulty] = [];
           }
-        }
-        
-        // 3. Mapから最高スコアのレコードだけを取り出して配列に戻す
-        const filteredRecords = Array.from(highestScores.values());
-        
-        // --- ▲▲ ここまでが修正箇所 ▲▲ ---
-        
-        // 4. 最高スコアの配列を、スコアの降順（高い順）に並び替え
-        const sortedRecords = filteredRecords.sort((a, b) => b.score - a.score);
+          acc[difficulty].push(record);
+          return acc;
+        }, {});
 
-        const list = document.createElement('ol');
-        sortedRecords.forEach(record => {
-          const item = document.createElement('li');
-          const scoreText = document.createTextNode(record.name + ': ' + record.score);
-          const songSpan = document.createElement('span');
-          // 最高スコアを記録した時の曲名を表示
-          songSpan.textContent = '(曲: ' + record.song + ')';
+        for (const difficultyName of Object.keys(groupedByDifficulty).sort()) {
+          const difficultySection = document.createElement('div');
+          difficultySection.className = 'difficulty-ranking';
           
-          item.appendChild(scoreText);
-          item.appendChild(songSpan);
-          list.appendChild(item);
-        });
-        
-        difficultySection.appendChild(list);
-        gameSection.appendChild(difficultySection);
+          const difficultyTitle = document.createElement('h5');
+          difficultyTitle.textContent = difficultyName;
+          difficultySection.appendChild(difficultyTitle);
+          
+          const highestScores = new Map();
+          
+          for (const record of groupedByDifficulty[difficultyName]) {
+            const name = record.name;
+            if (!highestScores.has(name) || record.score > highestScores.get(name).score) {
+              highestScores.set(name, record);
+            }
+          }
+          
+          const filteredRecords = Array.from(highestScores.values());
+          
+          const sortedRecords = filteredRecords.sort((a, b) => b.score - a.score);
+
+          const list = document.createElement('ol');
+          sortedRecords.forEach(record => {
+            const item = document.createElement('li');
+            const scoreText = document.createTextNode(record.name + ': ' + record.score);
+            
+            item.appendChild(scoreText);
+            
+            if (record.comment) {
+              const commentDiv = document.createElement('div');
+              commentDiv.className = 'comment-bubble';
+              commentDiv.textContent = record.comment;
+              item.appendChild(commentDiv);
+            }
+            
+            list.appendChild(item);
+          });
+          
+          difficultySection.appendChild(list);
+          songSection.appendChild(difficultySection);
+        }
+        gameSection.appendChild(songSection);
       }
       rankingContainer.appendChild(gameSection);
     }
