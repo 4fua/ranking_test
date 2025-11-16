@@ -4,7 +4,7 @@ const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwMdqGxDiclieFV
 
 const songDatabase = {
   "A": [
-    "機種A - 課題曲1",
+    "機種A - 課題曲1aa",
     "機種A - 課題曲2",
     "機種A - 課題曲3"
   ],
@@ -112,3 +112,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
