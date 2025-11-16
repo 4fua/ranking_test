@@ -10,10 +10,10 @@ const settingsDatabase = {
       "IIDX 課題曲2"
     ],
     difficulties: [
-      "NORMAL",
-      "HYPER",
-      "ANOTHER",
-      "LEGGENDARIA"
+      "SPN",
+      "SPH",
+      "SPA",
+      "SPL"
     ]
   },
   "SDVX": {
@@ -22,37 +22,23 @@ const settingsDatabase = {
       "SDVX 課題曲B"
     ],
     difficulties: [
-      "NOVICE",
-      "ADVANCED",
-      "EXHAUST",
-      "MAXIMUM",
-      "VIVID"
+      "NOV",
+      "ADV",
+      "EXH",
+      "MXMなど"
     ]
   },
-  "chunithm": {
+  "CHUNITHM": {
     songs: [
-      "チュウニズム 課題曲X",
-      "チュウニズム 課題曲Y"
+      "CHUNITHM 課題曲X",
+      "CHUNITHM 課題曲Y"
     ],
     difficulties: [
-      "BASIC",
-      "ADVANCED",
-      "EXPERT",
-      "MASTER",
-      "ULTIMA"
-    ]
-  },
-  "オンゲキ": {
-    songs: [
-      "オンゲキ 課題曲1",
-      "オンゲキ 課題曲2"
-    ],
-    difficulties: [
-      "BASIC",
-      "ADVANCED",
-      "EXPERT",
-      "MASTER",
-      "LUNATIC"
+      "BAS",
+      "ADV",
+      "EXP",
+      "MAS",
+      "ULT"
     ]
   }
 };
@@ -326,3 +312,4 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRankings();
 
 });
+
