@@ -6,8 +6,8 @@ const IS_SUBMISSION_OPEN = true;
 const settingsDatabase = {
   "IIDX": {
     songs: [
-      "IIDX 課題曲1",
-      "IIDX 課題曲2"
+      "Nyan Nyan University",
+      "デラむぅのでらっくす☆どり～むぅ"
     ],
     difficulties: [
       "NORMAL",
@@ -18,20 +18,20 @@ const settingsDatabase = {
   },
   "SDVX": {
     songs: [
-      "SDVX 課題曲A",
-      "SDVX 課題曲B"
+      "千歳に泡影",
+      "幻想プロミネンス"
     ],
     difficulties: [
       "NOV",
       "ADV",
       "EXH",
-      "MXMなど"
+      "MXM相当"
     ]
   },
   "CHUNITHM": {
     songs: [
-      "CHUNITHM 課題曲X",
-      "CHUNITHM 課題曲Y"
+      "メズマライザー",
+      "メッちゅう殴打"
     ],
     difficulties: [
       "BAS",
@@ -312,5 +312,6 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRankings();
 
 });
+
 
 
