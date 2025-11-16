@@ -129,11 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const tidValue = document.getElementById('tidInput').value;
-    const nameValue = document.getElementById('nameInput').value;
+    const tidValue = document.getElementById('tidInput').value.trim();
+    const nameValue = document.getElementById('nameInput').value.trim();
 
     if (!tidValue || !nameValue) {
-      setStatus("TIDと名前は両方必須です。", true);
+      setStatus("TIDと名前は両方必須です（空白のみは不可）。", true);
       return;
     }
 
@@ -255,11 +255,24 @@ document.addEventListener('DOMContentLoaded', () => {
           const sortedRecords = filteredRecords.sort((a, b) => b.score - a.score);
 
           const list = document.createElement('ol');
-          sortedRecords.forEach(record => {
+          sortedRecords.forEach((record, index) => {
             const item = document.createElement('li');
-            const scoreText = document.createTextNode(record.name + ': ' + record.score);
             
-            item.appendChild(scoreText);
+            const rankSpan = document.createElement('span');
+            rankSpan.className = 'rank';
+            rankSpan.textContent = (index + 1) + '.';
+            
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'name';
+            nameSpan.textContent = record.name;
+
+            const scoreSpan = document.createElement('span');
+            scoreSpan.className = 'score';
+            scoreSpan.textContent = record.score;
+            
+            item.appendChild(rankSpan);
+            item.appendChild(nameSpan);
+            item.appendChild(scoreSpan);
             
             if (record.comment) {
               const commentDiv = document.createElement('div');
