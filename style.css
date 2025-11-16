@@ -72,3 +72,38 @@ button:disabled {
   text-align: center;
   font-size: 1.1em;
 }
+
+#rankingSection {
+  margin-top: 30px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+#rankingContainer h3 {
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+#rankingContainer h4 {
+  color: #555;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+  margin-top: 15px;
+}
+
+#rankingContainer ol {
+  padding-left: 20px;
+}
+
+#rankingContainer li {
+  margin-bottom: 8px;
+  font-size: 1.1em;
+}
+
+#rankingContainer li span {
+  font-size: 0.9em;
+  color: #777;
+  margin-left: 10px;
+}
