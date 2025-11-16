@@ -12,8 +12,8 @@
 
   <section id="infoSection">
     <h2>0月IR</h2>
-    <p>スコアを更新する場合、以前提出したものと同じ<strong>Twitter ID (@なし)</strong>を入力し、送信してください。</p>
-    <p>間違えてしまったりなど(送信の取り消しとか)は、fua X(m4fua), Discord(m4fua)まで。</p>
+    <p>スコアを更新する場合、以前提出したものと同じ<strong>X ID(旧twitter, @なし)</strong>を入力し、送信してください。</p>
+    <p>送信の取り消し・不具合などは、fua X(m4fua), Discord(m4fua)までお気軽に。</p>
   </section>
 
   <form id="scoreForm">
@@ -24,8 +24,7 @@
         <option value="">-- 機種を選んでください --</option>
         <option value="IIDX">IIDX</option>
         <option value="SDVX">SDVX</option>
-        <option value="chunithm">chunithm</option>
-        <option value="オンゲキ">オンゲキ</option>
+        <option value="chunithm">CHUNITHM</option>
       </select>
     </div>
 
@@ -44,12 +43,12 @@
     </div>
 
     <div class="form-group">
-      <label for="tidInput">Twitter ID (必須・@なし・スコア更新用):</label>
-      <input type="text" id="tidInput" required placeholder="例: GoogleJapan (ランキングには表示されません)">
+      <label for="tidInput">X ID (スコア更新に利用します。ランキングには表示されません。):</label>
+      <input type="text" id="tidInput" required placeholder="例: m4fua (@はつけないでください)">
     </div>
     
     <div class="form-group">
-      <label for="nameInput">名前 (必須・ランキング表示用):</label>
+      <label for="nameInput">名前:</label>
       <input type="text" id="nameInput" required>
     </div>
 
@@ -79,3 +78,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
