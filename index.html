@@ -10,6 +10,16 @@
 
   <h1>スコア送信フォーム</h1>
 
+  <section id="infoSection">
+    <h2>サークルからのお知らせ</h2>
+    <p>ここに注意事項やイベントルールなどを自由に記述できます。</p>
+    <p>この文章は、index.html の id="infoSection" の中を直接編集してください。</p>
+    <ul>
+      <li>ルール1: 〇〇であること。</li>
+      <li>ルール2: △△は禁止です。</li>
+    </ul>
+  </section>
+
   <form id="scoreForm">
     
     <div class="form-group">
@@ -45,6 +55,11 @@
     <div class="form-group">
       <label for="scoreInput">スコア:</label>
       <input type="number" id="scoreInput" required>
+    </div>
+
+    <div class="form-group">
+      <label for="commentInput">ひとこと (任意):</label>
+      <textarea id="commentInput" rows="3"></textarea>
     </div>
 
     <button type="submit" id="submitButton">送信</button>
