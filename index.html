@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スコア送信フォーム</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>スコア送信フォーム</h1>
+
+  <form id="scoreForm">
+    
+    <div class="form-group">
+      <label for="gameSelect">機種を選択:</label>
+      <select id="gameSelect" required>
+        <option value="">-- 機種を選んでください --</option>
+        <option value="A">機種 A</option>
+        <option value="B">機種 B</option>
+        <option value="C">機種 C</option>
+        <option value="D">機種 D</option>
+      </select>
+      </div>
+
+    <div class="form-group">
+      <label for="songSelect">曲名を選択:</label>
+      <select id="songSelect" required disabled>
+        <option value="">-- まず機種を選んでください --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+      <label for="nameInput">名前:</label>
+      <input type="text" id="nameInput" required>
+    </div>
+
+    <div class="form-group">
+      <label for="scoreInput">スコア:</label>
+      <input type="number" id="scoreInput" required>
+    </div>
+
+    <button type="submit" id="submitButton">送信</button>
+  </form>
+
+  <div id="statusMessage"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
