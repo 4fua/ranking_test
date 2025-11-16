@@ -33,6 +33,21 @@ h1 {
   color: #555;
 }
 
+#passwordSection {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+#passwordSection label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
 #scoreForm {
   display: grid;
   gap: 16px;
@@ -50,6 +65,7 @@ h1 {
 
 input[type="text"],
 input[type="number"],
+input[type="password"],
 select,
 textarea {
   width: 100%;
@@ -95,6 +111,20 @@ button:disabled {
   margin-top: 20px;
   text-align: center;
   font-size: 1.1em;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#statusMessage.success {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+#statusMessage.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
 }
 
 #rankingSection {
@@ -103,24 +133,35 @@ button:disabled {
   padding-top: 20px;
 }
 
-#rankingContainer h3 {
-  background-color: #f0f0f0;
-  padding: 10px;
-  margin-top: 20px;
-  border-radius: 4px;
+.game-ranking {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 25px;
+  background-color: #fafafa;
+}
+
+.game-ranking > h3 {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 15px;
+  margin-top: -15px;
+  margin-left: -15px;
+  margin-right: -15px;
+  border-radius: 8px 8px 0 0;
 }
 
 #rankingContainer .song-ranking > h4 {
   color: #555;
   border-bottom: 2px solid #007bff;
   padding-bottom: 5px;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 #rankingContainer .difficulty-ranking > h5 {
   font-weight: bold;
   color: #333;
-  margin-top: 10px;
+  margin-top: 15px;
   margin-bottom: 5px;
   padding-left: 10px;
 }
