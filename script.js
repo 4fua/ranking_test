@@ -1,23 +1,7 @@
 const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJ2E-NGVDBTnqBJse2VcArOPwFxxCSQu-s6hAk5GYU6BECE9tR9DJPFV76CKYt0Vh0KA/exec';
 
-// ==========================================================
-// ▼▼ 基本設定 ▼▼
-// ==========================================================
-
-// (1) サークル内パスワード (ここの "" の中を設定してください)
-const REQUIRED_PASSWORD = "password123";
-
-// (2) ランキング公開設定
-// true: ランキングを表示する
-// false: ランキングを隠す
 const IS_RANKING_PUBLIC = true;
-
-// (3) スコア送信受付設定
-// true: スコア送信を受け付ける
-// false: スコア送信を停止する
 const IS_SUBMISSION_OPEN = true;
-
-// ==========================================================
 
 const settingsDatabase = {
   "IIDX": {
@@ -81,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusMessage = document.getElementById('statusMessage');
   const submitButton = document.getElementById('submitButton');
   const rankingContainer = document.getElementById('rankingContainer');
-  const passwordInput = document.getElementById('passwordInput');
 
   function setStatus(message, isError = false) {
     statusMessage.textContent = message;
@@ -146,14 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    if (passwordInput.value !== REQUIRED_PASSWORD) {
-      setStatus("パスワードが間違っています。", true);
-      return;
-    }
-
     const tidValue = document.getElementById('tidInput').value;
-    if (!tidValue) {
-      setStatus("Twitter IDは必須です。", true);
+    const nameValue = document.getElementById('nameInput').value;
+
+    if (!tidValue || !nameValue) {
+      setStatus("TIDと名前は両方必須です。", true);
       return;
     }
 
@@ -166,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
       song: document.getElementById('songSelect').value,
       difficulty: document.getElementById('difficultySelect').value,
       tid: tidValue,
-      name: document.getElementById('nameInput').value,
+      name: nameValue,
       score: document.getElementById('scoreInput').value,
       comment: document.getElementById('commentInput').value
     };
@@ -263,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const highestScores = new Map();
           
           for (const record of groupedByDifficulty[difficultyName]) {
-            if (!record.tid || record.score === null || record.score === undefined) continue;
+            if (!record.tid || !record.name || record.score === null || record.score === undefined) continue;
             const tid = record.tid;
             if (!highestScores.has(tid) || record.score > highestScores.get(tid).score) {
               highestScores.set(tid, record);
@@ -277,8 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const list = document.createElement('ol');
           sortedRecords.forEach(record => {
             const item = document.createElement('li');
-            const displayName = record.name || '名無しさん';
-            const scoreText = document.createTextNode(displayName + ': ' + record.score);
+            const scoreText = document.createTextNode(record.name + ': ' + record.score);
             
             item.appendChild(scoreText);
             
@@ -334,5 +313,3 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRankings();
 
 });
-
-
