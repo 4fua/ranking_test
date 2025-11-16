@@ -151,13 +151,41 @@ button:disabled {
 }
 
 #rankingContainer ol {
-  padding-left: 30px;
+  padding-left: 0;
+  list-style-type: none;
 }
 
 #rankingContainer li {
-  margin-bottom: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   font-size: 1.1em;
-  list-style-type: decimal;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed #ddd;
+}
+
+#rankingContainer li .rank {
+  font-weight: bold;
+  width: 35px;
+  flex-shrink: 0;
+}
+
+#rankingContainer li .name {
+  font-weight: bold;
+  width: 200px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#rankingContainer li .score {
+  font-weight: bold;
+  color: #0056b3;
+  flex-grow: 1;
+  text-align: right;
+  padding-right: 10px;
 }
 
 .comment-bubble {
@@ -165,10 +193,12 @@ button:disabled {
   border: 1px solid #c8e1ff;
   border-radius: 5px;
   padding: 8px 12px;
-  margin-top: 5px;
+  margin-top: 8px;
   font-size: 0.9em;
   color: #333;
-  display: inline-block;
   white-space: pre-wrap;
   word-break: break-all;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: 35px;
 }
