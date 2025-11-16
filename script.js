@@ -19,11 +19,11 @@ const settingsDatabase = {
       "SDVX 課題曲B"
     ],
     difficulties: [
-      "NOVICE",
-      "ADVANCED",
-      "EXHAUST",
-      "MAXIMUM",
-      "VIVID"
+      "NOV",
+      "ADV",
+      "EXH",
+      "MXM",
+      "VVD"
     ]
   },
   "chunithm": {
@@ -145,3 +145,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
