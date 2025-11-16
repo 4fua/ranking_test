@@ -1,4 +1,4 @@
-const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxB3C7Y4qFyNByERjGmnrwGbw5AfVC9-gopyMoSm1xAxSyqeMPc1mqip7ySv7VERWX78Q/exec';
+const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJ2E-NGVDBTnqBJse2VcArOPwFxxCSQu-s6hAk5GYU6BECE9tR9DJPFV76CKYt0Vh0KA/exec';
 
 // ==========================================================
 // ▼▼ 基本設定 ▼▼
@@ -334,4 +334,5 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRankings();
 
 });
+
 
