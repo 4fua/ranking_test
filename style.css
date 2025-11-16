@@ -16,6 +16,23 @@ h1 {
   color: #444;
 }
 
+#infoSection {
+  background-color: #fffaf0;
+  border: 1px solid #ffe0b2;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+#infoSection h2 {
+  border-bottom: 2px solid #ffcc80;
+  padding-bottom: 5px;
+}
+
+#infoSection p, #infoSection li {
+  color: #555;
+}
+
 #scoreForm {
   display: grid;
   gap: 16px;
@@ -33,12 +50,19 @@ h1 {
 
 input[type="text"],
 input[type="number"],
-select {
+select,
+textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box; 
+  font-family: inherit;
+  font-size: 1em;
+}
+
+textarea {
+  resize: vertical;
 }
 
 select[disabled] {
@@ -86,24 +110,40 @@ button:disabled {
   border-radius: 4px;
 }
 
-#rankingContainer h4 {
+#rankingContainer .song-ranking > h4 {
   color: #555;
   border-bottom: 2px solid #007bff;
   padding-bottom: 5px;
   margin-top: 15px;
 }
 
+#rankingContainer .difficulty-ranking > h5 {
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+}
+
 #rankingContainer ol {
-  padding-left: 20px;
+  padding-left: 30px;
 }
 
 #rankingContainer li {
-  margin-bottom: 8px;
+  margin-bottom: 15px;
   font-size: 1.1em;
+  list-style-type: decimal;
 }
 
-#rankingContainer li span {
+.comment-bubble {
+  background-color: #f1f8ff;
+  border: 1px solid #c8e1ff;
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin-top: 5px;
   font-size: 0.9em;
-  color: #777;
-  margin-left: 10px;
+  color: #333;
+  display: inline-block;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
