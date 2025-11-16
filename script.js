@@ -1,4 +1,4 @@
-const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwMdqGxDiclieFVx3OU9beJ2GdxY4xwcSDSBshAnR5K1iz8hGpHR5qJqlbSO8mQ4iHgZg/exec';
+const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxU77C72UagubZXgaEpbLvaLGVtG55jn6_48n6XopRuMFSmOrsO-2jT9n8YxE7iZqtZlQ/exec';
 
 const settingsDatabase = {
   "IIDX": {
@@ -154,3 +154,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
