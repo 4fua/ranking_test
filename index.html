@@ -16,18 +16,25 @@
       <label for="gameSelect">機種を選択:</label>
       <select id="gameSelect" required>
         <option value="">-- 機種を選んでください --</option>
-        <option value="A">beatmania IIDX</option>
-        <option value="B">SOUND VOLTEX</option>
-        <option value="C">chunithm</option>
-        <option value="D">オンゲキ</option>
+        <option value="A">機種 A</option>
+        <option value="B">機種 B</option>
+        <option value="C">機種 C</option>
+        <option value="D">機種 D</option>
       </select>
-      </div>
+    </div>
 
     <div class="form-group">
       <label for="songSelect">曲名を選択:</label>
       <select id="songSelect" required disabled>
-        <option value="">-- 機種を選んでください--</option>
-        </select>
+        <option value="">-- まず機種を選んでください --</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="difficultySelect">難易度:</label>
+      <select id="difficultySelect" required disabled>
+        <option value="">-- まず機種を選んでください --</option>
+      </select>
     </div>
 
     <div class="form-group">
@@ -47,5 +54,4 @@
 
   <script src="script.js"></script>
 </body>
-
 </html>
