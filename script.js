@@ -10,10 +10,10 @@ const settingsDatabase = {
       "IIDX 課題曲2"
     ],
     difficulties: [
-      "SPN",
-      "SPH",
-      "SPA",
-      "SPL"
+      "NORMAL",
+      "HYPER",
+      "ANOTHER",
+      "LEGGENDARIA"
     ]
   },
   "SDVX": {
@@ -312,4 +312,5 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRankings();
 
 });
+
 
