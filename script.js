@@ -28,7 +28,7 @@ const settingsDatabase = {
       "MXM相当"
     ]
   },
-  "CHUNITHM": {
+  "chunithm": {
     songs: [
       "メズマライザー",
       "メッちゅう殴打"
@@ -117,8 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const tidValue = document.getElementById('tidInput').value.trim();
     const nameValue = document.getElementById('nameInput').value.trim();
+    
+    const tidNormalized = tidValue.toLowerCase();
 
-    if (!tidValue || !nameValue) {
+    if (!tidNormalized || !nameValue) {
       setStatus("TIDと名前は両方必須です（空白のみは不可）。", true);
       return;
     }
@@ -131,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
       game: document.getElementById('gameSelect').value,
       song: document.getElementById('songSelect').value,
       difficulty: document.getElementById('difficultySelect').value,
-      tid: tidValue,
+      tid: tidNormalized,
       name: nameValue,
       score: document.getElementById('scoreInput').value,
       comment: document.getElementById('commentInput').value
@@ -147,11 +149,21 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(response => {
       setStatus('スコアを送信しました！最新のランキングを読み込みます...', false);
-      form.reset(); 
+      
+      // ▼▼ ここから修正 ▼▼
+      // form.reset(); // ← これを削除
+      
+      // TID (tidInput) と 名前 (nameInput) 以外の項目をリセット
+      document.getElementById('gameSelect').value = "";
+      document.getElementById('scoreInput').value = "";
+      document.getElementById('commentInput').value = "";
+
+      // プルダウンも初期状態に戻す
       songSelect.innerHTML = '<option value="">-- まず機種を選んでください --</option>';
       songSelect.disabled = true;
       difficultySelect.innerHTML = '<option value="">-- まず機種を選んでください --</option>';
       difficultySelect.disabled = true;
+      // ▲▲ ここまで修正 ▲▲
       
       loadRankings(); 
     })
@@ -230,9 +242,11 @@ document.addEventListener('DOMContentLoaded', () => {
           
           for (const record of groupedByDifficulty[difficultyName]) {
             if (!record.tid || !record.name || record.score === null || record.score === undefined) continue;
-            const tid = record.tid;
-            if (!highestScores.has(tid) || record.score > highestScores.get(tid).score) {
-              highestScores.set(tid, record);
+            
+            const tidNormalized = record.tid.toLowerCase();
+            
+            if (!highestScores.has(tidNormalized) || record.score > highestScores.get(tidNormalized).score) {
+              highestScores.set(tidNormalized, record);
             }
           }
           
@@ -312,6 +326,3 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRankings();
 
 });
-
-
-
