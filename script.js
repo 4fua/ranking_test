@@ -121,9 +121,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const tidNormalized = tidValue.toLowerCase();
 
     if (!tidNormalized || !nameValue) {
-      setStatus("TIDと名前は両方必須です（空白のみは不可）。", true);
+      setStatus("IDと名前は両方必須です（空白のみは不可）。", true);
       return;
     }
+
+    // ▼▼ ここから修正 ▼▼
+    const scoreValue = document.getElementById('scoreInput').value;
+
+    // スコアが0以下、または入力されていない場合（required属性があるため基本ないが念のため）
+    if (!scoreValue || scoreValue <= 0) {
+      setStatus("スコアは1以上の数値を入力してください。", true);
+      return; // 送信を中止
+    }
+    // ▲▲ ここまで修正 ▲▲
 
     submitButton.disabled = true;
     submitButton.textContent = '送信中...';
@@ -135,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
       difficulty: document.getElementById('difficultySelect').value,
       tid: tidNormalized,
       name: nameValue,
-      score: document.getElementById('scoreInput').value,
+      score: scoreValue, // 修正した scoreValue を使用
       comment: document.getElementById('commentInput').value
     };
 
@@ -150,20 +160,14 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => {
       setStatus('スコアを送信しました！最新のランキングを読み込みます...', false);
       
-      // ▼▼ ここから修正 ▼▼
-      // form.reset(); // ← これを削除
-      
-      // TID (tidInput) と 名前 (nameInput) 以外の項目をリセット
       document.getElementById('gameSelect').value = "";
       document.getElementById('scoreInput').value = "";
       document.getElementById('commentInput').value = "";
 
-      // プルダウンも初期状態に戻す
       songSelect.innerHTML = '<option value="">-- まず機種を選んでください --</option>';
       songSelect.disabled = true;
       difficultySelect.innerHTML = '<option value="">-- まず機種を選んでください --</option>';
       difficultySelect.disabled = true;
-      // ▲▲ ここまで修正 ▲▲
       
       loadRankings(); 
     })
@@ -245,14 +249,14 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const tidNormalized = record.tid.toLowerCase();
             
-            if (!highestScores.has(tidNormalized) || record.score > highestScores.get(tidNormalized).score) {
+            if (!highestScores.has(tidNormalized) || Number(record.score) > Number(highestScores.get(tidNormalized).score)) {
               highestScores.set(tidNormalized, record);
             }
           }
           
           const filteredRecords = Array.from(highestScores.values());
           
-          const sortedRecords = filteredRecords.sort((a, b) => b.score - a.score);
+          const sortedRecords = filteredRecords.sort((a, b) => Number(b.score) - Number(a.score));
 
           const list = document.createElement('ol');
           sortedRecords.forEach((record, index) => {
