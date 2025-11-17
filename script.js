@@ -28,7 +28,7 @@ const settingsDatabase = {
       "MXM相当"
     ]
   },
-  "chunithm": {
+  "CHUNITHM": {
     songs: [
       "メズマライザー",
       "メッちゅう殴打"
@@ -330,3 +330,4 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRankings();
 
 });
+
